@@ -1,0 +1,105 @@
+
+@keyframes piscar-verde {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+    }
+}
+
+.piscar-no-foco {
+    animation: piscar-verde 0.5s ease-in-out;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden; 
+}
+
+.navbar {
+    margin: 0;
+    padding: 0;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+.card {
+    margin: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+div.fundo {
+    background: linear-gradient(-135deg, #c850c0, #4158d0);
+}
+
+div.espacamentoCard{
+    width: 18rem;
+}
+
+div.cardCustomizado{
+    width: 20rem;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+
+div.tituloCard{
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+#fundo {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+input[type="text"],
+input[type="password"],
+select,
+textarea {
+    color: black !important;
+}
+
+#quadrado {
+    color: black;
+    background-color: white;
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+}
+
+input.transparent-input {
+    color: white;
+    background: #E6E6E6;
+    border-radius: 20px;
+}
+
+input.transparent-input::placeholder {
+    color: black;
+}
+
+input.transparent-input:focus {
+    background: #E6E6E6;
+}
+
+.btn.black {
+    color: black;
+    background: #0dbf3a;
+}
+
+.btn.black:hover {
+    background-color: #48594d;
+    outline: none;
+    box-shadow: none;
+    color: white;
+}
