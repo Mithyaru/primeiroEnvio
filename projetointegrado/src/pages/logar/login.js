@@ -19,13 +19,21 @@ function Login() {
     setErro('');
     try {
       const response = await axios.post('http://localhost:3001/login', { email, senha });
+      const { adm, nome, email: emailRetornado, apartamento } = response.data;
+      localStorage.setItem('user', JSON.stringify({
+        nome,
+        email: emailRetornado,
+        apartamento,
+        adm
+      }));
+      console.log('Usuário salvo:', localStorage.getItem('user'));
       console.log(response)
-      const { adm } = response.data;
+  
+      // Redireciona
       if (adm) {
         navigate('/admindashboard');
       } else {
         navigate('/userdashboard');
-
       }
     } catch (err) {
       const status = err.response?.status;
@@ -36,6 +44,7 @@ function Login() {
       }
     }
   };
+  
 
   return (
     <div className="App fundo">

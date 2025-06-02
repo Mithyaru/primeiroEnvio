@@ -17,6 +17,9 @@ function Admindashboard() {
 
                   <h5 className="mb-5">Escolha uma opção:</h5>
 
+                  <Link to="/areaComum" className="btn btn-outline-dark btn-lg mb-3 px-5">
+                    Reservar horário
+                  </Link>
 
                   <Link to="/cadastroMorador" className="btn btn-outline-dark btn-lg mb-3 px-5">
                     Cadastro de Morador

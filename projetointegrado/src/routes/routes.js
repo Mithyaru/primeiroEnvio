@@ -5,6 +5,7 @@ import CadastroVisitante from "../pages/logar/cadastroVisitante.js";
 import Login from "../pages/logar/login";
 import Admindashboard from "../pages/feed/admindashboard";
 import Userdashboard from "../pages/feed/userdashboard";
+import AreaComum from "../pages/feed/areaComum.js";
 
 function AppRoutes(){
 
@@ -17,6 +18,7 @@ function AppRoutes(){
         <Route exact path="/CadastroMorador" element={<CadastroMorador />} />
         <Route exact path="/admindashboard" element={<Admindashboard />} />
         <Route exact path="/userdashboard" element={<Userdashboard />} />
+        <Route exact path="/areaComum" element={<AreaComum />} />
 
       </Routes>
        </BrowserRouter>
