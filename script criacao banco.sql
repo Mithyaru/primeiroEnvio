@@ -21,7 +21,8 @@ create table visitante(
 
 create table area(
     nome varchar(80),
-    dt_reservado datetime
+    dt_inicio datetime,
+    dt_fim datetime
 );
 
 

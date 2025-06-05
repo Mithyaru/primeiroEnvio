@@ -8,18 +8,50 @@ function AreaComum() {
         data: "",
         horaInicio: "",
         horaFim: "",
+        motivo: "reserva"
     });
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Reserva enviada:", form);
-        alert("Reserva enviada com sucesso!");
-        // Enviar para backend futuramente
+
+        const reservaData = {
+            nome: userInfo.nome,
+            data: form.data,
+            horaInicio: form.horaInicio,
+            horaFim: form.horaFim,
+            motivo: form.motivo,
+        };
+
+        console.log(reservaData)
+
+        try {
+            const response = await fetch("http://localhost:3001/reserva-area", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(reservaData),
+            });
+    
+            const result = await response.json();
+            console.log(result)
+    
+            if (response.ok) {
+                alert("Reserva enviada com sucesso!");
+                console.log(result);
+            } else {
+                alert("Erro ao enviar reserva: " + result.error);
+            }
+        } catch (error) {
+            console.error("Erro na requisição:", error);
+            alert("Erro ao enviar reserva.");
+        }
     };
+
 
     return (
         <div className="fundo">
@@ -59,7 +91,20 @@ function AreaComum() {
                         />
                     </label>
 
-                    <button type="submit">Reservar</button>
+                    <label>
+                        Motivo:
+                        <select
+                            name="motivo"
+                            value={form.motivo}
+                            onChange={handleChange}
+                            required
+                        >
+                            <option value="reserva">Reserva</option>
+                            <option value="manutencao">Manutenção</option>
+                        </select>
+                    </label>
+
+                    <button type="submit" onClick={handleSubmit} >Reservar</button>
                 </form>
             </div>
         </div>
