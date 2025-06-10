@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../../estilos/areaComum.css"
+import { Link } from "react-router-dom";
 
 function AreaComum() {
     const userInfo = JSON.parse(localStorage.getItem('user'));
@@ -44,7 +45,8 @@ function AreaComum() {
                 alert("Reserva enviada com sucesso!");
                 console.log(result);
             } else {
-                alert("Erro ao enviar reserva: " + result.error);
+                alert(result.message || "Erro ao fazer reserva.");
+                return;
             }
         } catch (error) {
             console.error("Erro na requisição:", error);
@@ -105,6 +107,10 @@ function AreaComum() {
                     </label>
 
                     <button type="submit" onClick={handleSubmit} >Reservar</button>
+
+                    <Link to="/reservasTabela" className="btn btn-outline-dark btn-lg mb-3 px-5">
+                        Horarios reservados
+                      </Link>
                 </form>
             </div>
         </div>

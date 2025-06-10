@@ -51,4 +51,22 @@ body {
   .reserva-form button:hover {
     background-color: #005fa3;
   }
+
+  .reserva-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.reserva-tabela th,
+.reserva-tabela td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.reserva-tabela th {
+    background-color: #f2f2f2;
+}
+
   
