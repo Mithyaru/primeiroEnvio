@@ -6,8 +6,8 @@ import axios from 'axios';
 function CadastroVisitante() {
   const formRef = useRef(null);
   const [nome, setNome] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [dataVisita, setDataVisita] = useState('');
+  const [documento, setDocumento] = useState('');
+  const [dt_visita, setDtVisita] = useState('');
   const [erro, setErro] = useState('');
   const [mensagem, setMensagem] = useState('');
 
@@ -17,34 +17,35 @@ function CadastroVisitante() {
     setErro('');
     setMensagem('');
 
-    if (!nome || !cpf || !dataVisita) {
+    if (!nome || !documento || !dt_visita) {
       setErro('Todos os campos são obrigatórios.');
       return;
     }
-    if (!validarCpf(cpf)) {
+    if (!validarCpf(documento)) {
       setErro('CPF inválido. Deve conter 11 dígitos numéricos.');
       return;
     }
 
-    axios.post('http://localhost:3001/registerVisitante',{ 
-      nome, 
-      cpf, 
-      data: dataVisita 
-    }).then((response) =>{
+    axios.post("http://localhost:3001/registerVisitante", {
+      nome,
+      documento,
+      dt_visita
+    })
+    .then((response) => {
       setMensagem(response.data.message);
-      formRef.current.reset();
-    }).catch((error) =>{
-      if(error.response && error.response.data && error.response.data.error){
+      formRef.current?.reset();
+      setNome('');
+      setDocumento('');
+      setDtVisita('');
+    })
+    .catch((error) => {
+      if (error.response?.data?.error) {
         setErro(error.response.data.error);
       } else {
-        setErro('Erro ao cadastrar.');
+        setErro("Erro ao cadastrar visitante.");
       }
-    })
-
-      setNome('');
-      setCpf('');
-      setDataVisita('');
-  };
+    });
+  }
 
   useEffect(() => {
     const elements = formRef.current.querySelectorAll('input');
@@ -77,12 +78,10 @@ function CadastroVisitante() {
                     </h3>
                   </div>
 
-                  {/* Formulário de cadastro */}
-                  <form name="frmResetarSenha" action="resetarSenha" ref={formRef}>
+                  <form ref={formRef}>
                     <div className="form-outline form-white mb-4">
                       <input
                         type="text"
-                        name="login"
                         className="form-control form-control-lg transparent-input"
                         placeholder="Nome Completo"
                         onChange={e => setNome(e.target.value)}
@@ -92,30 +91,28 @@ function CadastroVisitante() {
                     <div className="form-outline form-white mb-4">
                       <input
                         type="text"
-                        name="cpf"
                         className="form-control form-control-lg transparent-input"
                         placeholder="Insira seu CPF"
-                        onChange={e => setCpf(e.target.value)}
+                        onChange={e => setDocumento(e.target.value)}
                       />
                     </div>
 
                     <div className="form-outline form-white mb-4">
                       <input
                         type="date"
-                        name="DataVisita"
                         className="form-control form-control-lg transparent-input"
-                        onChange={e => setDataVisita(e.target.value)}
+                        onChange={e => setDtVisita(e.target.value)}
                       />
                     </div>
                     <input
                       type="button"
                       value="Cadastrar"
                       className="btn btn-outline-light btn-lg px-5 black"
-                      onClick= {handleClickButton}
+                      onClick={handleClickButton}
                     />
                   </form>
-                  {erro && <div style={{color:'red', marginTop:10}}>{erro}</div>}
-                  {mensagem && <div style={{color:'green',marginTop:10}}>{mensagem}</div>}
+                  {erro && <div style={{ color: 'red', marginTop: 10 }}>{erro}</div>}
+                  {mensagem && <div style={{ color: 'green', marginTop: 10 }}>{mensagem}</div>}
                 </div>
               </div>
             </div>
